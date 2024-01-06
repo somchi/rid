@@ -127,6 +127,7 @@ main {
   width: 100%;
   background-color: var(--foreground-rgb);
 }
+
 .dropdown {
   display: grid;
   position: absolute;
@@ -313,9 +314,18 @@ button {
 .events-area {
   display: flex;
   flex-wrap: wrap;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
   gap: 1rem;
   max-width: 90%;
+}
+.events-calender {
+  height: 100%;
+  .event-card {
+    position: absolute;
+    background-color: white;
+    z-index: 20;
+    right: 0;
+  }
 }
 
 .event-card {
@@ -352,8 +362,20 @@ button {
 }
 
 .eventCalender {
-  height: 500px;
-  /* width: 300px; */
+  /* display: grid; */
+  height: 600px;
+  position: relative;
+  zoom: 1;
+}
+.rbc-toolbar {
+  /* overflow: auto; */
+  /* display: grid !important; */
+  width: 300px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (max-width: 400px) {
@@ -423,5 +445,10 @@ button {
     .time-picker {
       padding-right: 1rem;
     }
+  }
+  .events-area {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem 2rem;
   }
 }
