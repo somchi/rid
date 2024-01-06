@@ -23,7 +23,7 @@ export const EventForm = () => {
     if (Object.keys(state.edit).length !== 0) {
       const startDate = DateTime.fromISO(state.edit.startTime);
       const endDate = DateTime.fromISO(state.edit.endTime);
-      console.log(startDate.toJSDate());
+
       setData({
         ...state.edit,
         startTime: startDate.toJSDate(),
@@ -54,7 +54,7 @@ export const EventForm = () => {
       const startTime = DateTime.fromObject({
         year: start.getFullYear(),
         month: start.getMonth() + 1,
-        day: start.getDay(),
+        day: start.getDate(),
         hour: convertTo24(parseInt(time.start.hour), time.start.amPm),
         minute: parseInt(time.start.min),
         second: 0,
@@ -64,7 +64,7 @@ export const EventForm = () => {
       const endTime = DateTime.fromObject({
         year: end.getFullYear(),
         month: end.getMonth() + 1,
-        day: end.getDay(),
+        day: end.getDate(),
         hour: convertTo24(parseInt(time.end.hour), time.end.amPm),
         minute: parseInt(time.end.min),
         second: 0,
@@ -116,8 +116,6 @@ export const EventForm = () => {
     const field = e.target.name;
     setData({ ...data, [field]: value });
   };
-
-  console.log(data);
 
   return (
     <>
