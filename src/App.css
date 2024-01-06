@@ -1,38 +1,427 @@
-.App {
-  text-align: center;
+:root {
+  --dark-blue: #101924;
+  --foreground-rgb: #f1f1f3;
+  --font-color: #576372;
+  --tw-shadow: 0 50px 25px -30px rgb(0 0 0 / 0.1),
+    0 50px 60px -40px rgb(0 0 0 / 0.1);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+  height: 100%;
+  width: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+body {
+  background-color: var(--foreground-rgb);
+  color: var(--font-color);
+  font-size: 16px;
+}
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+aside {
+  background-color: var(--dark-blue);
+  width: 300px;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 10;
+  position: absolute;
+  /* display: grid; */
+  padding: 2rem 0;
+  top: 0;
+  left: 0;
+  filter: drop-shadow(rgba(0, 0, 0, 0.1) 1px 50px 40px);
+  -webkit-filter: drop-shadow(rgba(0, 0, 0, 0.1) 1px 50px 40px);
+  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+
+  #hamburger {
+    display: flex;
+    padding: 0 1rem 0;
+  }
+  .sidebar-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    cursor: pointer;
+    .icon {
+      font-weight: 700;
+      font-size: 1.5rem;
+      width: 1.5rem;
+      margin-top: -0.5rem;
+      text-align: center;
+    }
+  }
+}
+.sidebar-content {
+  padding: 2rem 1rem;
+}
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.logo[data-open='false'] {
+  display: none;
+}
+
+aside[data-open='false'] {
+  width: 0px;
+  padding: 2rem 0;
+}
+
+main {
+  /* display: grid; */
+  width: 100%;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  background-color: white;
+  padding: 1rem 1rem;
+  height: 3rem;
+  justify-content: space-between;
+  align-items: center;
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    .title {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+  }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    .selector {
+      display: grid;
+      position: relative;
+      .selected-event {
+        display: flex;
+        border: 1px solid;
+        border-radius: 12px;
+        height: 2rem;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.24rem 1rem;
+        font-size: 0.85rem;
+        .arrow {
+          margin-top: 0.4rem;
+        }
+      }
+    }
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.separator {
+  height: 1px;
+  width: 100%;
+  background-color: var(--foreground-rgb);
+}
+.dropdown {
+  display: grid;
+  position: absolute;
+  height: 4rem;
+  width: 10rem;
+  padding: 0.2rem 1rem;
+  top: 2.6rem;
+  background-color: white;
+  border-radius: 10px;
+  z-index: 30;
+  filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.08));
+  -webkit-filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.08));
+  .event-type {
+    cursor: pointer;
+    margin: 0;
+  }
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  font-style: italic;
+  font-stretch: expanded;
+}
+
+.modal {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  .modal-box {
+    position: absolute;
+    background-color: white;
+    border-radius: 12px;
+    top: 50%;
+    left: 50%;
+    padding: 1.5rem;
+    overflow: auto;
+    height: 80%;
+    width: 80%;
+    transform: translate(-50%, -50%);
+    .header {
+      display: flex;
+      padding: 0.5rem 0.875rem;
+      align-items: center;
+      justify-content: space-between;
+      .label {
+        display: grid;
+      }
+      .title {
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+      .desciption {
+        font-weight: 500;
+      }
+      .close {
+        border-radius: 100%;
+        border: 1.5px solid rgb(197, 9, 9);
+        height: 1.5rem;
+        width: 1.5rem;
+        align-items: center;
+        display: grid;
+        justify-content: center;
+        cursor: pointer;
+        margin-bottom: 1rem;
+        .close-icon {
+          color: rgb(197, 9, 9);
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+.form-control {
+  display: grid;
+  /* width: 100%; */
+  margin: 1rem 1rem 1rem 0;
+}
+form {
+  .form-label {
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .form-input {
+    height: 1rem;
+    width: 100%;
+    padding: 0.75rem 0.5rem;
+    border: 1px solid #74767b;
+    border-radius: 5px;
+  }
+  .form-area {
+    height: 1rem;
+    width: 100%;
+    padding: 0.75rem 0.5rem;
+    border: 1px solid #74767b;
+    border-radius: 5px;
+  }
+  .form-input:focus {
+    outline: none !important;
+    border: 1px solid #6576ff;
+  }
+}
+button {
+  width: 150px;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background-color: #6576ff;
+  border: 1px solid transparent;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.picker {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  align-items: center;
+  /* flex-wrap: wrap; */
+  .calender {
+    width: 69%;
+    position: relative;
+    /* padding-left: 1rem; */
+  }
+  .date-picker {
+    width: 100%;
+    /* height: 1rem; */
+  }
+  .calander-value {
+    height: 1rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid #74767b;
+    border-radius: 5px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+  }
+  .time-picker {
+    display: flex;
+    width: 30%;
+    padding-right: 1rem;
+    gap: 0.8rem;
+    .time-box {
+      border: 1px solid #74767b;
+      border-radius: 5px;
+      padding: 0 0.2rem;
+      height: 2.5rem;
+    }
+    .time-box:focus {
+      outline: none !important;
+      border: 1px solid #6576ff;
+      display: flex;
+      align-items: center;
+    }
+    .time-item {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      width: 30%;
+      .dropdown {
+        left: 0;
+        top: 4rem;
+        width: 2rem;
+        z-index: 10;
+      }
+    }
+  }
+
+  .datetime {
+    position: absolute;
+    top: 4rem;
+    background-color: white;
+    border: 1px solid #6576ff;
+    border-radius: 12px;
+    z-index: 10;
+  }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.events-area {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem 2rem;
+  gap: 1rem;
+  max-width: 90%;
+}
+
+.event-card {
+  background-color: white;
+  width: 300px;
+  padding: 1rem 1.2rem;
+  .time {
+    display: grid;
+    margin: 1rem 0;
   }
-  to {
-    transform: rotate(360deg);
+}
+.event-item {
+  position: relative;
+}
+
+.delete-warn {
+  background-color: rgb(169, 163, 163);
+  position: absolute;
+  color: white;
+  padding: 1rem;
+  bottom: 0;
+  width: 280px;
+  z-index: 20;
+}
+.action {
+  display: flex;
+  gap: 1rem;
+  .edit {
+    background-color: gray;
+  }
+  .delete {
+    background-color: rgb(222, 18, 18);
+  }
+}
+
+.eventCalender {
+  height: 500px;
+  /* width: 300px; */
+}
+
+@media (max-width: 400px) {
+  .picker {
+    display: grid;
+    .calender {
+      width: 100% !important;
+      /* padding-right: 1rem !important; */
+    }
+    .time-picker {
+      width: 100% !important;
+      /* padding-left: 1rem; */
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  aside {
+    overflow: hidden;
+    position: relative;
+    width: 320px;
+    padding: 2rem 0;
+    .close {
+      display: none;
+    }
+  }
+  aside[data-open='false'] {
+    width: 70px;
+    .sidebar-content {
+      padding: 2rem 0;
+    }
+    .sidebar-item {
+      justify-content: center;
+      .label {
+        display: none;
+      }
+    }
+  }
+  .sidebar-content {
+    padding: 2rem 2rem;
+  }
+  main {
+    /* width: calc(100% - 300px); */
+  }
+
+  .header {
+    padding: 1rem 2rem;
+    #hamburger {
+      display: none;
+    }
+  }
+  .modal {
+    .modal-box {
+      width: 50%;
+      height: 50%;
+    }
+  }
+
+  .form-control {
+    margin: 1rem 2rem 1rem 1rem;
+  }
+
+  .picker {
+    .calender {
+      padding-left: 1rem;
+    }
+    .time-picker {
+      padding-right: 1rem;
+    }
   }
 }
